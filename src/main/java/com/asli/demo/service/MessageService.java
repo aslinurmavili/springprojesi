@@ -16,3 +16,4 @@ public class MessageService {
         printer.printMessage();
     }
 }
+
