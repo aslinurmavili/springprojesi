@@ -1,4 +1,4 @@
-package com.asli.demo;
+package com.asli.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

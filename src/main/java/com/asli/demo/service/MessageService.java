@@ -1,4 +1,4 @@
-package com.asli.demo;
+package com.asli.demo.service;
 
 import org.springframework.stereotype.Service;
 
