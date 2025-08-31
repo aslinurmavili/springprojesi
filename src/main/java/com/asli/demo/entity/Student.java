@@ -1,9 +1,10 @@
 package com.asli.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -14,6 +15,12 @@ public class Student {
 
     private String name;
     private String email;
+
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Book> books = new ArrayList<>();
+
 
 
     public Long getId() {
@@ -38,5 +45,19 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+
+    public void addBook(Book book) {
+        books.add(book);
+        book.setStudent(this);
     }
 }

@@ -12,20 +12,22 @@ public class StudentController {
 
     private final StudentService studentService;
 
-
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
-    // Öğrenci ekleme (POST)
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
         return studentService.saveStudent(student);
     }
 
-    // Öğrencileri listeleme (GET)
     @GetMapping
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
     }
 }
