@@ -34,13 +34,16 @@ public class StudentService {
 
 
     public Student addBookToStudent(Long studentId, Book book) {
-        Optional<Student> optionalStudent = studentRepository.findById(studentId);
-        if (optionalStudent.isPresent()) {
-            Student student = optionalStudent.get();
-            student.addBook(book);
-            return studentRepository.save(student);
-        } else {
-            throw new RuntimeException("Öğrenci bulunamadı, ID: " + studentId);
-        }
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Öğrenci bulunamadı, ID: " + studentId));
+        student.addBook(book);
+        return studentRepository.save(student);
+    }
+
+
+    public List<Book> getBooksOfStudent(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Öğrenci bulunamadı, ID: " + studentId));
+        return student.getBooks();
     }
 }
